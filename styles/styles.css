@@ -1,3 +1,5 @@
+/* GENERAL */
+
 @font-face {
     font-family: digital7;
     src: url('../font/digital-7-font/Digital7-rg1mL.ttf')
@@ -10,35 +12,87 @@
 
 h1 {
     font-size: 3em;
+    padding: 0 1em
 }
 
+/* LAYOUT */
+
 section#calculator {
-    width: 40%;
+    width: 45%;
     margin: auto;
-    padding: 4em 2em;
+    padding: 4em 2.5em;
     border: 3px solid black;
+    min-width: 600px;
 }
 
 input#display {
     width: 100%;
-    box-sizing: border-box;
     font-size: 3.5rem;
     text-align: right;
     font-family: digital7;
+    border-radius: 5px;
+    padding: 10px 30px;
 }
 
 div#keys {
     display: grid;
-    grid-template-columns: repeat(4, 25fr);
+    grid-template-columns: repeat(5, 25fr);
     margin: 1.25rem 0 0 0;
     grid-column-gap: 0.75em;
     grid-row-gap: 0.75em;
 }
 
 div#keys button {
-    font-size: 1.75em;
-    padding: 0.75em;
+    font-size: 1.85em;
+    padding: 0.5em;
     border-radius: 10px;
     border: 2px solid gray;
 }
 
+div#keys button:active {
+    box-shadow: 1px 1px 15px 0px #171717;
+}
+
+/* BUTTONS */
+
+button.number {
+    background:#6b7074;
+    color:#e8eaed;
+}
+
+button.number:hover{
+    background: #424548;
+    border-color: #424548;
+}
+
+button.operator {
+    background: #a0a0a0;
+    color: #e8eaed;
+}
+
+button.operator:hover {
+    background: #7b7b7b;
+    border-color: #70757a;
+}
+
+button.action {
+    background:#fba300;
+    color:#e8eaed;
+}
+
+button.action:hover {
+    background: #ff8c00;
+    color:#e8eaed;
+}
+
+button.equal {
+    grid-column-start: -1;
+    grid-column-end: -3;
+    background: #6597d0;
+    color: #000
+}
+
+button.equal:hover {
+    background: #3578c4;
+    color: #000;
+}
