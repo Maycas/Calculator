@@ -1,17 +1,32 @@
 class Display {
 
-    containerId = ''
+    htmlNode = null
+    id = 'display'
+    displayValue = ''
 
-    constructor(containerId) {
-        this.containerId = containerId
+    constructor() {
+        this.htmlNode = this.createNode(this.id)
     }
 
-    createNode() {
-        const display = document.createElement('input')
-        display.setAttribute('id', this.containerId)
-        display.setAttribute('type', 'text')
+    createNode(containerId) {
+        const node = document.createElement('input')
+        node.setAttribute('id', containerId)
+        node.setAttribute('type', 'text')
 
-        return display
+        return node
+    }
+
+    getHtmlComponent() {
+        return this.htmlNode
+    }
+
+    getValue() {
+        return this.displayValue
+    }
+
+    setValue(value) {
+        this.displayValue = value
+        this.htmlNode.innerHTML = this.displayValue
     }
 
 }

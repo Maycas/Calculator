@@ -80,23 +80,23 @@ class Calculator {
         },
         
     ]
+    display = ''
 
     constructor(containerId) {
         this.containerId = containerId
-        this.keys = this.keys.map(key => new Key(key.value, key.className))
+        this.display = new Display().getHtmlComponent()
+        this.keys = this.keys.map(key => new Key(key.value, key.className).getHtmlComponent())
     }
 
     renderDisplay(calculatorContainer) {
-        const display = new Display('display')
-        calculatorContainer.appendChild(display.createNode())
-        return display
+        calculatorContainer.appendChild(this.display)
     }
 
     renderKeys(calculatorContainer) {
         const keysContainer = document.createElement('div')
         keysContainer.setAttribute('id', 'keys')
         this.keys.map(key => {
-            keysContainer.appendChild(key.createNode())
+            keysContainer.appendChild(key)
         })
         calculatorContainer.appendChild(keysContainer)       
     }
@@ -111,9 +111,9 @@ class Calculator {
         this.renderKeys(calculator)
 
         // Capture elements events
-        calculator.addEventListener('click', (event) => {
-            console.log(event.target.innerText || event.target.value)
-        })
+        // calculator.addEventListener('click', (event) => {
+        //     console.log(event.target.innerText || event.target.value)
+        // })
     }
 }
 
