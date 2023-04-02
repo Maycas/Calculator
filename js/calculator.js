@@ -83,6 +83,7 @@ class Calculator {
 
     constructor(containerId) {
         this.containerId = containerId
+        this.keys = this.keys.map(key => new Key(key.value, key.className))
     }
 
     renderDisplay(calculatorContainer) {
@@ -95,7 +96,7 @@ class Calculator {
         const keysContainer = document.createElement('div')
         keysContainer.setAttribute('id', 'keys')
         this.keys.map(key => {
-            keysContainer.appendChild(new Key(key.value, key.className).createNode())
+            keysContainer.appendChild(key.createNode())
         })
         calculatorContainer.appendChild(keysContainer)       
     }
