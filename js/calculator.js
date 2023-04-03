@@ -67,7 +67,7 @@ class Calculator {
             className: 'number'
         },
         {
-            value: 00,
+            value: '00',
             className: 'number'
         },
         {
@@ -80,40 +80,39 @@ class Calculator {
         },
         
     ]
-    display = ''
+    display = null
+    displayValue = '0'
 
     constructor(containerId) {
         this.containerId = containerId
-        this.display = new Display().getHtmlComponent()
-        this.keys = this.keys.map(key => new Key(key.value, key.className).getHtmlComponent())
+        this.display = new Display(this.displayValue)
+        this.keys = this.keys.map(key => new Key(key.value, key.className))
     }
 
     renderDisplay(calculatorContainer) {
-        calculatorContainer.appendChild(this.display)
+        this.display.setValue(this.displayValue)
+        calculatorContainer.appendChild(this.display.getHtmlComponent())
+
     }
 
     renderKeys(calculatorContainer) {
         const keysContainer = document.createElement('div')
         keysContainer.setAttribute('id', 'keys')
         this.keys.map(key => {
-            keysContainer.appendChild(key)
+            keysContainer.appendChild(key.getHtmlComponent())
+            key.onClickCallback = this.setDisplayValue.bind(this)
         })
         calculatorContainer.appendChild(keysContainer)       
     }
 
     render() {
         const calculator = document.getElementById(this.containerId)
-
-        // Render display
         this.renderDisplay(calculator)
-
-        // Render keys
         this.renderKeys(calculator)
+    }
 
-        // Capture elements events
-        // calculator.addEventListener('click', (event) => {
-        //     console.log(event.target.innerText || event.target.value)
-        // })
+    setDisplayValue(value) {
+        this.display.setValue(value)
     }
 }
 

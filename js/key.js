@@ -1,8 +1,10 @@
 class Key {
 
     htmlNode = null
-    value = 0
     className = ''
+    value = 0
+
+    onClickCallback = null
 
     constructor(value, className) {
         this.value = value
@@ -29,7 +31,9 @@ class Key {
     }
 
     onClick() {
-        console.log(this)
+        if(this.onClickCallback) {
+            this.onClickCallback(this.getValue())
+        }
     }
 
 

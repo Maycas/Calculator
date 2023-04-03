@@ -2,10 +2,12 @@ class Display {
 
     htmlNode = null
     id = 'display'
-    displayValue = ''
 
-    constructor() {
+    constructor(displayValue) {
         this.htmlNode = this.createNode(this.id)
+        this.displayValue = displayValue
+
+        console.log(this)
     }
 
     createNode(containerId) {
@@ -20,13 +22,8 @@ class Display {
         return this.htmlNode
     }
 
-    getValue() {
-        return this.displayValue
-    }
-
     setValue(value) {
-        this.displayValue = value
-        this.htmlNode.innerHTML = this.displayValue
+        this.getHtmlComponent().value = value
     }
 
 }
