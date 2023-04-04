@@ -1,10 +1,9 @@
 class Display {
 
     htmlNode = null
-    id = 'display'
 
     constructor(displayValue) {
-        this.htmlNode = this.createNode(this.id)
+        this.htmlNode = this.createNode('display')
         this.displayValue = displayValue
     }
 
@@ -23,5 +22,4 @@ class Display {
     setValue(value) {
         this.getHtmlComponent().value = value
     }
-
 }

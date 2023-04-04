@@ -111,7 +111,7 @@ class Calculator {
         this.renderKeys(calculator)
     }
 
-    setDisplayValue(value) {
+    performOperation(value) {
         // Clean display for the first leading '0'
         if(this.displayValue === '0') {
             this.displayValue = ''
@@ -142,6 +142,10 @@ class Calculator {
         }
         
         console.log('After', this.displayValue)
+    }
+
+    setDisplayValue(value) {
+        this.performOperation(value)
         this.display.setValue(this.displayValue)
     }
 }
