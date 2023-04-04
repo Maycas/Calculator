@@ -6,8 +6,6 @@ class Display {
     constructor(displayValue) {
         this.htmlNode = this.createNode(this.id)
         this.displayValue = displayValue
-
-        console.log(this)
     }
 
     createNode(containerId) {

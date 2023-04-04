@@ -35,6 +35,4 @@ class Key {
             this.onClickCallback(this.getValue())
         }
     }
-
-
 }

@@ -112,7 +112,37 @@ class Calculator {
     }
 
     setDisplayValue(value) {
-        this.display.setValue(value)
+        // Clean display for the first leading '0'
+        if(this.displayValue === '0') {
+            this.displayValue = ''
+        }
+
+        console.log('Before', this.displayValue)
+
+        switch(value) {
+            case '=':
+                this.displayValue = String(eval(this.displayValue))
+                break
+            case 'CE':
+                this.displayValue = '0'
+                break
+            case 'DEL':
+                // Set a '0' if we are removing last character
+                if(this.displayValue.length <= 1) {
+                    this.displayValue = '0'
+                } 
+                // Remove last character in display
+                if(this.displayValue !== '0') {
+                    this.displayValue = this.displayValue.substring(0, this.displayValue.length - 1)
+                } 
+                break
+            default:
+                this.displayValue += value
+                break
+        }
+        
+        console.log('After', this.displayValue)
+        this.display.setValue(this.displayValue)
     }
 }
 
