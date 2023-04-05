@@ -133,13 +133,13 @@ class Calculator {
     }
 
     updateDisplayValueFromKeyboard(event, value) {
-        // TODO control input of letters
+
+        this._displayValue = value
+        
         // TODO Manage to block calculator input if error is displayed
 
-        //console.log(event)
-        console.log(value)
-        this._displayValue = value
-        console.log(this._displayValue)
+        
+        //console.log(this._displayValue)
     }
 
     updateDisplayValueFromCalculatorKeys(value) {
