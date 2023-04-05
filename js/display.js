@@ -1,6 +1,7 @@
 class Display {
     constructor() {
         this._html = this.createNode('display')
+        this._enabled = true
         
         this.onKeyboardPressedCallback = null
     }
@@ -11,6 +12,7 @@ class Display {
         node.setAttribute('type', 'text')
 
         node.addEventListener('keyup', this.onKeyboardPressed.bind(this))
+        node.addEventListener('keydown', this.onKeyboardDisabled.bind(this))
         node.addEventListener('keydown', this.preventWrongCharacters.bind(this))
     
         return node
@@ -24,13 +26,31 @@ class Display {
         return this._html.value
     }
 
+    get enabled() {
+        return this._enabled
+    }
+
     set value(value) {
         this._html.value = value
     }
 
+    set enabled(value) {
+        this._enabled = value
+    }
+
+    onKeyboardDisabled(event){
+        if(!this.enabled) {
+            event.preventDefault()
+        }
+    }
+
     onKeyboardPressed(event) {
-        if(this.onKeyboardPressedCallback) {
-            this.onKeyboardPressedCallback(event, this.value)
+        if(this.enabled) {
+            if(this.onKeyboardPressedCallback) {
+                this.onKeyboardPressedCallback(event, this.value)
+            }
+        } else {
+            event.preventDefault()
         }
     }
 

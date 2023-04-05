@@ -130,6 +130,7 @@ class Calculator {
         } catch (error) {
             console.error(error)
             this._displayValue = 'ERROR'
+            this._display.enabled = false
         } 
     }
     
@@ -158,27 +159,30 @@ class Calculator {
 
     updateDisplayValueFromCalculatorKeys(value) {
         //TODO Manage to block calculator input if error is displayed
-        switch(value) {
-            case '=':
-                this.evalOperation()
-                break
-            case 'CE':
-                this.clearDisplay()
-                break
-            case 'DEL':
-                this.deleteLastDisplayValueCharacter()
-                break
-            default:
-                this._displayValue += value
-                break
+        if(value === 'CE') {
+            this.clearDisplay()
+            this._display.enabled = true
+        } else if(this._display.enabled) {
+            switch(value) {
+                case '=':
+                    this.evalOperation()
+                    break
+                case 'CE':
+                    
+                    break
+                case 'DEL':
+                    this.deleteLastDisplayValueCharacter()
+                    break
+                default:
+                    this._displayValue += value
+                    break
+            } 
         }
 
         this.cleanLeadingZeroes()
-        this._display.value = this._displayValue   
+        this._display.value = this._displayValue  
     }
 }
 
 const calculator = new Calculator('calculator')
 calculator.render()
-
-//TODO: Block in case of an error in display. Force user to push CE button
