@@ -111,9 +111,10 @@ class Calculator {
 
     evalOperation() {
         try {
-            this._displayValue
+            this._displayValue = this._displayValue.replace(/^0+/, ''); // remove leading zeros
             this._displayValue = String(eval(this._displayValue))
         } catch (error) {
+            console.error(error)
             this._displayValue = 'ERROR'
         } 
     }
@@ -134,7 +135,6 @@ class Calculator {
     }
 
     updateDisplayValueFromKeyboard(event, value) {
-
         this._displayValue = value      
         // TODO Manage to block calculator input if error is displayed
     }
