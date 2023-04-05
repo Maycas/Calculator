@@ -98,7 +98,7 @@ class Calculator {
         keysContainer.setAttribute('id', 'keys')
         this.keys.map(key => {
             keysContainer.appendChild(key.html)
-            key.onClickCallback = this.setDisplayValue.bind(this)
+            key.onClickCallback = this.updateDisplayValueFromCalculatorKeys.bind(this)
         })
         calculatorContainer.appendChild(keysContainer)       
     }
@@ -109,18 +109,21 @@ class Calculator {
         this.renderKeys(calculator)
     }
 
+    clearDisplay() {
+        this._displayValue = '0'
+    }
+
     evalOperation() {
+        console.log(this._displayValue)
         try {
+            console.log(this._displayValue)
             this._displayValue = this._displayValue.replace(/^0+/, ''); // remove leading zeros
             this._displayValue = String(eval(this._displayValue))
+            console.log(this._displayValue)
         } catch (error) {
             console.error(error)
             this._displayValue = 'ERROR'
         } 
-    }
-
-    clearDisplay() {
-        this._displayValue = '0'
     }
     
     deleteLastDisplayValueCharacter() {
@@ -135,7 +138,15 @@ class Calculator {
     }
 
     updateDisplayValueFromKeyboard(event, value) {
-        this._displayValue = value      
+        const isEnterKey = (event.keyCode === 13)
+        
+        if(isEnterKey) {
+            this.evalOperation()
+        } else {
+            this._displayValue = value
+        }
+        
+        this._display.value = this._displayValue      
         // TODO Manage to block calculator input if error is displayed
     }
 
@@ -166,10 +177,7 @@ class Calculator {
                 this._displayValue += value
                 break
         }
-    }
 
-    setDisplayValue(value) {
-        this.updateDisplayValueFromCalculatorKeys(value)
         this._display.value = this._displayValue
     }
 }

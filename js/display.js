@@ -45,6 +45,7 @@ class Display {
             40, 41 // opening and closing parenthesis
         ];
 
+        //TODO: Allow Cmd+R to refresh
         const notAllowedKey = !allowedKeys.includes(event.keyCode)
         const isEqualSign = (event.key == '=')
         
