@@ -111,6 +111,7 @@ class Calculator {
 
     evalOperation() {
         try {
+            this._displayValue
             this._displayValue = String(eval(this._displayValue))
         } catch (error) {
             this._displayValue = 'ERROR'
@@ -134,20 +135,16 @@ class Calculator {
 
     updateDisplayValueFromKeyboard(event, value) {
 
-        this._displayValue = value
-        
+        this._displayValue = value      
         // TODO Manage to block calculator input if error is displayed
-
-        
-        //console.log(this._displayValue)
     }
 
     updateDisplayValueFromCalculatorKeys(value) {
         // Clean display for leading 0s
-        if(this._displayValue[0] === '0') {
-            this._displayValue = this._displayValue.replace(/^0+/, '');
-        }
-        console.log(this._displayValue)
+        // if(this._displayValue[0] === '0') {
+        //     this._displayValue = this._displayValue.replace(/^0+/, '');
+        // }
+        // console.log(this._displayValue)
         
         // if(this._displayValue === '0') {
         //     //TODO improve to detect if we are adding a number or an operator. Maybe I want to divide 0 by a number

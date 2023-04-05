@@ -43,12 +43,13 @@ class Display {
             107, 109, 106, 111, 221, 189, 187, // plus, minus, multiply, divide
             190, // decimal point
             40, 41 // opening and closing parenthesis
-          ];
-        
-        console.log(event.keyCode)
+        ];
 
-        if (!allowedKeys.includes(event.keyCode)) {
-          event.preventDefault();
+        const notAllowedKey = !allowedKeys.includes(event.keyCode)
+        const isEqualSign = (event.key == '=')
+        
+        if(isEqualSign || notAllowedKey) {
+            event.preventDefault()
         }
     }
 }
