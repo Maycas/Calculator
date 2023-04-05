@@ -1,6 +1,8 @@
 class Display {
 
     htmlNode = null
+    onKeyboardPressCallback = null
+    onClickCallback = null
 
     constructor(displayValue) {
         this.htmlNode = this.createNode('display')
@@ -12,6 +14,10 @@ class Display {
         node.setAttribute('id', containerId)
         node.setAttribute('type', 'text')
 
+        node.addEventListener('keyup', this.onKeyboardPressed.bind(this))
+
+        node.addEventListener('click', this.onClick.bind(this))
+
         return node
     }
 
@@ -20,6 +26,23 @@ class Display {
     }
 
     setValue(value) {
+        this.displayValue = value
         this.getHtmlComponent().value = value
+    }
+
+    getValue() {
+        return this.getHtmlComponent().value
+    }
+
+    onKeyboardPressed(event) {
+        if(this.onKeyboardPressCallback) {
+            this.onKeyboardPressCallback(event, this.getValue())
+        }
+    }
+
+    onClick() {
+        if(this.getValue() === '0') {
+            this.setValue('')
+        }
     }
 }

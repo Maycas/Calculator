@@ -91,8 +91,10 @@ class Calculator {
 
     renderDisplay(calculatorContainer) {
         this.display.setValue(this.displayValue)
+        this.display.onKeyboardPressCallback = this.updateDisplayValueFromKeyboard.bind(this)
         calculatorContainer.appendChild(this.display.getHtmlComponent())
 
+        //console.log(this.display)
     }
 
     renderKeys(calculatorContainer) {
@@ -111,17 +113,30 @@ class Calculator {
         this.renderKeys(calculator)
     }
 
-    performOperation(value) {
+    updateDisplayValueFromKeyboard(event, value) {
+        // TODO control input of letters
+        // TODO Manage to block calculator input if error is displayed
+        this.displayValue = value
+        console.log(event)
+    }
+
+    updateDisplayValueFromCalculatorKeys(value) {
         // Clean display for the first leading '0'
         if(this.displayValue === '0') {
+            //TODO improve to detect if we are adding a number or an operator. Maybe I want to divide 0 by a number
             this.displayValue = ''
         }
 
-        console.log('Before', this.displayValue)
+        //TODO Manage to block calculator input if error is displayed
 
         switch(value) {
             case '=':
-                this.displayValue = String(eval(this.displayValue))
+                //TODO implement a try - catch for errors
+                try {
+                    this.displayValue = String(eval(this.displayValue))
+                } catch (error) {
+                    this.displayValue = 'ERROR'
+                } 
                 break
             case 'CE':
                 this.displayValue = '0'
@@ -140,12 +155,10 @@ class Calculator {
                 this.displayValue += value
                 break
         }
-        
-        console.log('After', this.displayValue)
     }
 
     setDisplayValue(value) {
-        this.performOperation(value)
+        this.updateDisplayValueFromCalculatorKeys(value)
         this.display.setValue(this.displayValue)
     }
 }
