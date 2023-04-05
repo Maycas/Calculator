@@ -114,7 +114,6 @@ class Calculator {
     }
 
     cleanLeadingZeroes() {
-        console.log('before cleaning', this._displayValue)
         // Remove leading zeros from numbers
         this._displayValue = this._displayValue.replace(/(^|\D)0+(\d)/g, '$1$2');
       
@@ -123,9 +122,6 @@ class Calculator {
       
         // Remove leading zeros from negative numbers
         this._displayValuepr = this._displayValue.replace(/(^|\D)\-0+(\d)/g, '$1-$2');
-
-        console.log('after cleaning', this._displayValue)
-
       }
 
     evalOperation() {
@@ -185,5 +181,4 @@ class Calculator {
 const calculator = new Calculator('calculator')
 calculator.render()
 
-//TODO: Clean leading zeroes, causing some errors when calling eval()
 //TODO: Block in case of an error in display. Force user to push CE button
