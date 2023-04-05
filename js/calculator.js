@@ -113,13 +113,24 @@ class Calculator {
         this._displayValue = '0'
     }
 
+    cleanLeadingZeroes() {
+        console.log('before cleaning', this._displayValue)
+        // Remove leading zeros from numbers
+        this._displayValue = this._displayValue.replace(/(^|\D)0+(\d)/g, '$1$2');
+      
+        // Remove leading zeros from decimal points
+        this._displayValue = this._displayValue.replace(/(^|\D)0+(\.)/g, '$1$2');
+      
+        // Remove leading zeros from negative numbers
+        this._displayValuepr = this._displayValue.replace(/(^|\D)\-0+(\d)/g, '$1-$2');
+
+        console.log('after cleaning', this._displayValue)
+
+      }
+
     evalOperation() {
-        console.log(this._displayValue)
         try {
-            console.log(this._displayValue)
-            this._displayValue = this._displayValue.replace(`/^0+/`, ''); // remove leading zeros
             this._displayValue = String(eval(this._displayValue))
-            console.log(this._displayValue)
         } catch (error) {
             console.error(error)
             this._displayValue = 'ERROR'
@@ -128,7 +139,7 @@ class Calculator {
     
     deleteLastDisplayValueCharacter() {
         // Set a '0' if we are removing last character
-        if(this._displayValue.length < 1) {
+        if(this._displayValue.length <= 1) {
             this._displayValue = '0'
         } 
         // Remove last character in display
@@ -147,21 +158,9 @@ class Calculator {
         }
         
         this._display.value = this._displayValue      
-        // TODO Manage to block calculator input if error is displayed
     }
 
     updateDisplayValueFromCalculatorKeys(value) {
-        // Clean display for leading 0s
-        // if(this._displayValue[0] === '0') {
-        //     this._displayValue = this._displayValue.replace(/^0+/, '');
-        // }
-        // console.log(this._displayValue)
-        
-        // if(this._displayValue === '0') {
-        //     //TODO improve to detect if we are adding a number or an operator. Maybe I want to divide 0 by a number
-        //     this._displayValue = ''
-        // }
-
         //TODO Manage to block calculator input if error is displayed
         switch(value) {
             case '=':
@@ -178,9 +177,13 @@ class Calculator {
                 break
         }
 
-        this._display.value = this._displayValue
+        this.cleanLeadingZeroes()
+        this._display.value = this._displayValue   
     }
 }
 
 const calculator = new Calculator('calculator')
 calculator.render()
+
+//TODO: Clean leading zeroes, causing some errors when calling eval()
+//TODO: Block in case of an error in display. Force user to push CE button
