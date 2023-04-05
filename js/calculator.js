@@ -117,7 +117,7 @@ class Calculator {
         console.log(this._displayValue)
         try {
             console.log(this._displayValue)
-            this._displayValue = this._displayValue.replace(/^0+/, ''); // remove leading zeros
+            this._displayValue = this._displayValue.replace(`/^0+/`, ''); // remove leading zeros
             this._displayValue = String(eval(this._displayValue))
             console.log(this._displayValue)
         } catch (error) {
