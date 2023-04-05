@@ -90,9 +90,9 @@ class Calculator {
     }
 
     renderDisplay(calculatorContainer) {
-        this.display.setValue(this.displayValue)
+        this.display.displayValue = this.displayValue
         this.display.onKeyboardPressCallback = this.updateDisplayValueFromKeyboard.bind(this)
-        calculatorContainer.appendChild(this.display.getHtmlComponent())
+        calculatorContainer.appendChild(this.display.html)
 
         //console.log(this.display)
     }
@@ -131,7 +131,6 @@ class Calculator {
 
         switch(value) {
             case '=':
-                //TODO implement a try - catch for errors
                 try {
                     this.displayValue = String(eval(this.displayValue))
                 } catch (error) {
@@ -143,7 +142,7 @@ class Calculator {
                 break
             case 'DEL':
                 // Set a '0' if we are removing last character
-                if(this.displayValue.length <= 1) {
+                if(this.displayValue.length < 1) {
                     this.displayValue = '0'
                 } 
                 // Remove last character in display
@@ -159,7 +158,7 @@ class Calculator {
 
     setDisplayValue(value) {
         this.updateDisplayValueFromCalculatorKeys(value)
-        this.display.setValue(this.displayValue)
+        this.display.displayValue = this.displayValue
     }
 }
 
