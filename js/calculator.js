@@ -1,6 +1,5 @@
 class Calculator {
 
-    containerId = ''
     keys = [
         {
             value: 7,
@@ -80,13 +79,13 @@ class Calculator {
         },
         
     ]
-    display = null
-    displayValue = '0'
 
     constructor(containerId) {
         this.containerId = containerId
-        this.display = new Display(this.displayValue)
+        this.display = new Display()
+        this.displayValue = '0'
         this.keys = this.keys.map(key => new Key(key.value, key.className))
+
     }
 
     renderDisplay(calculatorContainer) {
@@ -101,7 +100,7 @@ class Calculator {
         const keysContainer = document.createElement('div')
         keysContainer.setAttribute('id', 'keys')
         this.keys.map(key => {
-            keysContainer.appendChild(key.getHtmlComponent())
+            keysContainer.appendChild(key.html)
             key.onClickCallback = this.setDisplayValue.bind(this)
         })
         calculatorContainer.appendChild(keysContainer)       

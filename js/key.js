@@ -1,38 +1,33 @@
 class Key {
-
-    htmlNode = null
-    className = ''
-    value = 0
-
-    onClickCallback = null
-
     constructor(value, className) {
-        this.value = value
-        this.className = className
-        this.htmlNode = this.createNode()
+        this._keyValue = value
+        this._className = className
+        this._html = this.createNode()
+
+        this.onClickCallback = null
     }
 
     createNode() {
         const node = document.createElement('button')
-        node.classList.add(this.className)
-        node.innerText = this.value
+        node.classList.add(this._className)
+        node.innerText = this._keyValue
 
         node.addEventListener('click', this.onClick.bind(this))
 
         return node
     }
 
-    getHtmlComponent() {
-        return this.htmlNode
+    get html() {
+        return this._html
     }
 
-    getValue() {
-        return this.value
+    get keyValue() {
+        return this._keyValue
     }
 
     onClick() {
         if(this.onClickCallback) {
-            this.onClickCallback(this.getValue())
+            this.onClickCallback(this._keyValue)
         }
     }
 }
