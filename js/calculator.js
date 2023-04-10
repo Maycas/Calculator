@@ -158,7 +158,6 @@ class Calculator {
     }
 
     updateDisplayValueFromCalculatorKeys(value) {
-        //TODO Manage to block calculator input if error is displayed
         if(value === 'CE') {
             this.clearDisplay()
             this._display.enabled = true
@@ -166,9 +165,6 @@ class Calculator {
             switch(value) {
                 case '=':
                     this.evalOperation()
-                    break
-                case 'CE':
-                    
                     break
                 case 'DEL':
                     this.deleteLastDisplayValueCharacter()
