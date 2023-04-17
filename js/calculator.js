@@ -126,7 +126,7 @@ class Calculator {
 
     evalOperation() {
         try {
-            this._displayValue = String(eval(this._displayValue))
+            this._displayValue = String(math.evaluate(this._displayValue))
         } catch (error) {
             console.error(error)
             this._displayValue = 'ERROR'
