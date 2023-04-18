@@ -121,7 +121,7 @@ class Calculator {
         this._displayValue = this._displayValue.replace(/(^|\D)0+(\.)/g, '$1$2');
       
         // Remove leading zeros from negative numbers
-        this._displayValuepr = this._displayValue.replace(/(^|\D)\-0+(\d)/g, '$1-$2');
+        this._displayValue = this._displayValue.replace(/(^|\D)\-0+(\d)/g, '$1-$2');
       }
 
     evalOperation() {
